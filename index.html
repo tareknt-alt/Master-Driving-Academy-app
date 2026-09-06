@@ -4007,10 +4007,10 @@ function ensureExpenses(){
 
 function addExpense(){
   ensureExpenses();
-  const category=document.getElementById('expCategory').value;
-  const amount=Number(document.getElementById('expAmount').value||0);
-  const date=document.getElementById('expDate').value||todayISO();
-  const notes=document.getElementById('expNotes').value.trim();
+  const category=document.getElementById('exCategory').value;
+  const amount=Number(document.getElementById('exAmount').value||0);
+  const date=document.getElementById('exDate').value||todayISO();
+  const notes=document.getElementById('exNotes').value.trim();
   if(!amount || amount<=0) return toast('اكتب مبلغ المصروف');
 
   db.expenses.push({
@@ -4022,8 +4022,8 @@ function addExpense(){
     createdAt:new Date().toISOString()
   });
   save();
-  document.getElementById('expAmount').value='';
-  document.getElementById('expNotes').value='';
+  document.getElementById('exAmount').value='';
+  document.getElementById('exNotes').value='';
   renderAccounts();
   toast('تم حفظ المصروف');
 }
@@ -4815,7 +4815,7 @@ function refreshAll(){
   syncReferrerCommissionExpenses();refreshSelects();renderToday();renderClients();renderSchedule();renderPayments();renderCompanies();renderReferrers();renderAccounts();renderReport();}
 fillTimes(firstTime,true);fillTimes(sTime,true);setupPhoneInputs();
 firstDate.value=todayISO();sDate.value=todayISO();pDate.value=todayISO();ctDate.value=todayISO();reportMonth.value=monthISO();
-if(document.getElementById('expDate')) document.getElementById('expDate').value=todayISO();
+if(document.getElementById('exDate')) document.getElementById('exDate').value=todayISO();
 if(document.getElementById('refPayDate')) document.getElementById('refPayDate').value=todayISO();
 migrateOldBookingsToCoursesV32();
 refreshAll();
