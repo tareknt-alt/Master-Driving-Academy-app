@@ -1,4 +1,4 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" /><meta name="theme-color" content="#123b63" /><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Master Academy"><title>Master Driving Academy</title><!-- APP_VERSION:v88 --><style>
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" /><meta name="theme-color" content="#123b63" /><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Master Academy"><title>Master Driving Academy</title><!-- APP_VERSION:v89 --><style>
 :root {
   --navy:#123b63;
   --green:#00a870;
@@ -2114,8 +2114,15 @@ function openClientDetails(id){
     const bookings=db.bookings.filter(b=>b.clientId===id && !isExtraBooking(b) && (!cr.id || b.courseId===cr.id));
     const counted=bookings.filter(b=>b.status==='done'||b.status==='no_show_charged').length;
     const remain=Math.max(0,Number(cr.lessons||0)-counted);
+    const courseStatusLabel=cr.status==='active'?'نشط':(cr.status==='cancelled'?'معتذر / ملغي':'سابق');
+    const courseStatusClass=cr.status==='cancelled'?'badge-red':(cr.status==='active'?'badge-green':'badge-blue');
     return `<div class="course-summary-row">
-      <div><b>${esc(cr.name||`الكورس ${i+1}`)}</b><div class="small">${cr.startDate?`بداية: ${cr.startDate}`:''}</div>${cr.id?`<button type="button" class="mini-edit-btn" onclick="openCourseEditV60('${c.id}','${cr.id}')">تعديل الكورس</button>`:''}</div>
+      <div>
+        <b>${esc(cr.name||`الكورس ${i+1}`)}</b>
+        <div class="small">${cr.startDate?`بداية: ${cr.startDate}`:''} <span class="badge ${courseStatusClass}">${courseStatusLabel}</span></div>
+        ${cr.status==='cancelled' && cr.cancelReason?`<div class="small" style="margin-top:5px;color:#a12e2e">سبب الإلغاء: ${esc(cr.cancelReason)}</div>`:''}
+        ${cr.id?`<button type="button" class="mini-edit-btn" onclick="openCourseEditV60('${c.id}','${cr.id}')">تعديل الكورس</button>`:''}
+      </div>
       <div class="course-summary-values">
         <span>${counted}/${Number(cr.lessons||0)} حصة</span>
         <span>${money(Number(cr.value||0))}</span>
@@ -2233,6 +2240,11 @@ function openClientDetails(id){
     <div class="btn-row" style="margin-top:12px">
       <button class="btn btn-light" onclick="editClientCommission('${c.id}')">تعديل العمولة</button>
       <button class="btn btn-light" onclick="editClient('${c.id}')">تعديل العميل</button><button class="btn btn-light" onclick="openClientStatementV60('${c.id}')">كشف حساب</button>
+      ${currentCourse && currentCourse.status==='active'
+        ? `<button class="btn btn-danger" onclick="cancelCurrentCourseV89('${c.id}')">إلغاء الكورس - العميل اعتذر</button>`
+        : (currentCourse && currentCourse.status==='cancelled'
+          ? `<button class="btn btn-green" onclick="reactivateCurrentCourseV89('${c.id}','${currentCourse.id}')">إعادة تفعيل الكورس</button>`
+          : '')}
       <button class="btn btn-primary" onclick="quickBook('${c.id}')">حجز حصة</button>
       <button class="btn btn-green" onclick="openExtraLessonForClient('${c.id}')">إضافة حصة إضافية</button>
       ${c.whatsapp?`<button class="btn btn-green" onclick="wa('${c.whatsapp||c.phone1||''}')">واتساب</button>`:''}
@@ -2287,6 +2299,66 @@ ${isActive?`<button class="btn btn-light" onclick="quickBook('${c.id}')">حجز 
 ${isActive?`<button class="btn btn-danger" onclick="cancelClient('${c.id}')">إلغاء العميل</button>`:`<button class="btn btn-green" onclick="reactivateClient('${c.id}')">إعادة التفعيل</button>`}
 </div></div>`
  }).join(''):'<div class="empty">لا يوجد عملاء في هذا القسم</div>';
+}
+
+
+function cancelCurrentCourseV89(clientId){
+  const c=db.clients.find(x=>x.id===clientId);
+  if(!c) return toast('العميل غير موجود');
+
+  ensureClientCoursesV32(c);
+  const course=(c.courses||[]).find(cr=>cr.status==='active');
+  if(!course) return toast('لا يوجد كورس نشط لإلغائه');
+
+  if(!confirm(`إلغاء كورس "${course.name||'الكورس'}" للعميل "${c.name}"؟\nسيتم الاحتفاظ بكل الحصص والدفعات السابقة.`)) return;
+
+  const reason=prompt('سبب إلغاء الكورس:', 'العميل اعتذر عن استكمال الكورس');
+  if(reason===null) return;
+
+  course.status='cancelled';
+  course.cancelledAt=todayISO();
+  course.cancelReason=(reason||'العميل اعتذر عن استكمال الكورس').trim();
+
+  // Cancel only future COURSE bookings for this course. Extra lessons are kept unchanged.
+  const future=db.bookings.filter(b =>
+    b.clientId===clientId &&
+    !isExtraBooking(b) &&
+    b.courseId===course.id &&
+    b.status==='booked' &&
+    b.date>=todayISO()
+  );
+
+  future.forEach(b=>{
+    b.status='cancelled_booking';
+    b.notes=(b.notes?b.notes+' - ':'')+'ألغي بسبب اعتذار العميل عن الكورس';
+  });
+
+  save();
+  toast(`تم إلغاء الكورس${future.length?` وإلغاء ${future.length} حجز مستقبلي`:''}`);
+  openClientDetails(clientId);
+}
+
+function reactivateCurrentCourseV89(clientId,courseId){
+  const c=db.clients.find(x=>x.id===clientId);
+  if(!c) return toast('العميل غير موجود');
+  ensureClientCoursesV32(c);
+
+  const course=(c.courses||[]).find(cr=>cr.id===courseId);
+  if(!course) return toast('الكورس غير موجود');
+
+  if((c.courses||[]).some(cr=>cr.status==='active' && cr.id!==course.id))
+    return toast('يوجد كورس نشط بالفعل لهذا العميل');
+
+  if(!confirm(`إعادة تفعيل كورس "${course.name||'الكورس'}"؟`)) return;
+
+  course.status='active';
+  course.reactivatedAt=todayISO();
+  delete course.cancelledAt;
+  delete course.cancelReason;
+
+  save();
+  toast('تم إعادة تفعيل الكورس');
+  openClientDetails(clientId);
 }
 
 function cancelClient(id){
@@ -2918,14 +2990,18 @@ function ensureClientCoursesV32(client){
     }
   }
   if(client.courses.length && !client.courses.some(c=>c.status==='active')){
-    client.courses[client.courses.length-1].status='active';
+    // Compatibility for old records only. Never reactivate a course explicitly cancelled by the user.
+    const hasExplicitCancelled=client.courses.some(c=>c.status==='cancelled');
+    if(!hasExplicitCancelled){
+      client.courses[client.courses.length-1].status='active';
+    }
   }
   return client.courses;
 }
 
 function getActiveCourseV32(client){
   const courses=ensureClientCoursesV32(client);
-  return courses.find(c=>c.status==='active') || courses[courses.length-1] || null;
+  return courses.find(c=>c.status==='active') || null;
 }
 
 function getCourseByIdV32(client,courseId){
