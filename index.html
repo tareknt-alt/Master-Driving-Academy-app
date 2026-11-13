@@ -1,4 +1,4 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" /><meta name="theme-color" content="#123b63" /><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Master Academy"><title>Master Driving Academy</title><!-- APP_VERSION:v107 --><style>
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" /><meta name="theme-color" content="#123b63" /><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Master Academy"><title>Master Driving Academy</title><!-- APP_VERSION:v108 --><style>
 :root {
   --navy:#123b63;
   --green:#00a870;
@@ -3045,6 +3045,9 @@ function openClientDetails(id){
         ${c.phone2?`<div><span>هاتف 2</span><b dir="ltr">${esc(c.phone2)}</b></div>`:''}
         ${c.whatsapp?`<div><span>واتساب</span><b dir="ltr">${esc(c.whatsapp)}</b></div>`:''}
       </div>
+      <div class="btn-row" style="margin-top:12px">
+        <button type="button" class="btn btn-green" onclick="sendAcademyFacebookV108('${c.id}')">إرسال صفحة الأكاديمية عبر واتساب</button>
+      </div>
     </div>
 
     <div class="card">
@@ -3303,6 +3306,7 @@ ${c.phone2?`<span class="phone-num">${esc(c.phone2)}</span><button class="copy-b
 ${extraLessonsBadgesV104(c.id)}
 <div class="btn-row" style="margin-top:8px">
 <button class="btn btn-green" onclick="wa('${c.whatsapp}')">واتساب</button>
+<button type="button" class="btn btn-light" onclick="sendAcademyFacebookV108('${c.id}')">إرسال صفحة الأكاديمية</button>
 ${isActive?`<button class="btn btn-light" onclick="quickBook('${c.id}')">حجز حصة</button>`:''}
 <button class="btn btn-light" onclick="editClient('${c.id}')">تعديل</button>
 ${isActive?`<button class="btn btn-danger" onclick="cancelClient('${c.id}')">إلغاء العميل</button>`:`<button class="btn btn-green" onclick="reactivateClient('${c.id}')">إعادة التفعيل</button>`}
@@ -6048,6 +6052,21 @@ function buildTomorrowMessageV70(client,booking){
     .replaceAll('[الاسم]',((client?.name||'').trim().split(/\s+/)[0]||''))
     .replaceAll('[الوقت]',booking?.time?formatTime12(booking.time):'')
     .replaceAll('[التاريخ]',booking?.date||'');
+}
+
+
+function sendAcademyFacebookV108(clientId){
+  const client=db.clients.find(c=>c.id===clientId);
+  if(!client) return toast('تعذر العثور على العميل');
+  const number=normalizePhoneValue(client.whatsapp||'')||normalizePhoneValue(client.phone1||'');
+  if(!number) return toast('أضف رقم واتساب أو هاتف للعميل أولًا');
+  const firstName=(client.name||'').trim().split(/\s+/)[0];
+  const message=(firstName?'أهلًا يا '+firstName+' 🌷':'أهلًا بحضرتك 🌷')+
+    '\nمرحبًا بيك في Master Driving Academy 🚗'+
+    '\nدي صفحة الأكاديمية على فيسبوك، تقدر تتابع عليها أخبارنا ونصائح القيادة:'+
+    '\nhttps://www.facebook.com/share/16QtfHWEjiv/?mibextid=wwXIfr'+
+    '\nسعداء بانضمامك لينا 💚';
+  waMessageV70(number,message);
 }
 
 function waMessageV70(num,message){
