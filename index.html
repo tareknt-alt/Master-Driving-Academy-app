@@ -512,7 +512,7 @@ input[type="month"],
 .week-event.excused{background:#c89422}
 .week-event.noshow{background:#c64b4b}
 .week-event.cancelled{background:#8997a2}
-.week-event-time{font-weight:900;font-size:12px;direction:ltr}
+.week-event-time{font-weight:900;font-size:12px;direction:rtl;display:inline-flex;align-items:center;justify-content:flex-start;gap:4px;unicode-bidi:isolate;white-space:nowrap}.week-event-time bdi{direction:rtl;unicode-bidi:isolate}
 .week-event-name{font-weight:900;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .week-event-lesson{grid-column:1/-1;font-size:10px;opacity:.94;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .week-empty{width:100%;border:1px dashed #cfd9df;background:#fafcfd;border-radius:9px;padding:14px 6px;color:#8a97a1;font-size:12px}
@@ -3960,7 +3960,7 @@ function renderScheduleWeekV35(holder){
       const st=statusInfoV35(b.status);
       const lesson=lessonLabelV35(b);
       return `<button class="week-event ${st.cls}" onclick="openBookingFromGrid('${b.id}')">
-        <span class="week-event-time">${formatTime12(b.time)} – ${formatTime12(endTimeV109(b.time,bookingMinutesV109(b)))}</span>
+        <span class="week-event-time" dir="rtl"><bdi dir="rtl">${formatTime12(b.time)}</bdi><span aria-hidden="true">–</span><bdi dir="rtl">${formatTime12(endTimeV109(b.time,bookingMinutesV109(b)))}</bdi></span>
         <span class="week-event-name">${c?esc(c.name):'عميل'}</span>
         ${lesson?`<span class="week-event-lesson">${esc(lesson)}</span>`:''}
       </button>`;
