@@ -1,4 +1,4 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" /><meta name="theme-color" content="#123b63" /><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Master Academy"><title>Master Driving Academy</title><!-- APP_VERSION:v108 --><style>
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" /><meta name="theme-color" content="#123b63" /><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Master Academy"><title>Master Driving Academy</title><!-- APP_VERSION:v109 --><style>
 :root {
   --navy:#123b63;
   --green:#00a870;
@@ -1382,7 +1382,7 @@ main{
   </div>
 </section>
 <section id="clients" class="page">
-<div id="clientsCounters" class="clients-counters clients-counters-v98"></div><div id="remainingLessonsPanelV98" class="remaining-lessons-panel-v98"></div><h2>العملاء</h2><div class="search"><input id="clientSearch" placeholder="ابحث بالاسم أو رقم التليفون" oninput="renderClients()"><button class="btn btn-primary" onclick="prepareNewClient()">+ عميل</button></div><div class="client-filter"><select id="clientStatusFilter" onchange="renderClients()"><option value="active">العملاء النشطون</option><option value="cancelled">العملاء الملغيون</option><option value="all">كل العملاء</option></select></div><div id="clientsList"></div></section><section id="add" class="page"><h2 id="clientFormTitle">إضافة عميل جديد</h2><div class="card"><div class="form-grid"><div class="full"><label>اسم العميل</label><input id="cName"></div><div><label>رقم التليفون 1</label><input id="cPhone1" type="text" inputmode="tel" autocomplete="tel" dir="ltr" class="phone-input"></div><div><label>رقم التليفون 2</label><input id="cPhone2" type="text" inputmode="tel" autocomplete="tel" dir="ltr" class="phone-input"></div><div><label>رقم واتساب</label><input id="cWhatsapp" type="text" inputmode="tel" autocomplete="tel" dir="ltr" class="phone-input"></div><div><label>حساب رصيد الكورس</label><select id="courseUnitV109" onchange="updateCourseUnitV109()"><option value="lessons">بالحصص — النظام السابق</option><option value="hours">بالساعات الفعلية</option></select><div class="small">لـ ٦ ساعات على ٤ مرات: اختار بالساعات واكتب ٦، ثم احجز كل مرة ٩٠ دقيقة.</div></div><div><label id="courseAmountLabelV109">عدد حصص الكورس</label><input id="cHours" type="number" value="5" min="1" step="1" dir="ltr"></div><div><label>قيمة الكورس</label><input id="cCourseValue" type="number" min="0" dir="ltr"></div><div><label>مصدر العميل</label><select id="cSource" onchange="toggleCompany()"><option value="academy">Master Driving Academy</option><option value="company">شركة</option></select></div><div id="companyWrap" class="hidden"><label>اسم الشركة</label><select id="cCompany"></select></div><div id="commissionWrap" class="hidden"><label>عمولة هذا العميل</label><input id="cCommission" type="number" min="0" dir="ltr"></div><div id="companyDepositWrapV97" class="hidden"><label>العربون الذي حصلته الشركة</label><input id="cCompanyDepositV97" type="number" min="0" dir="ltr" placeholder="0"></div><div id="companyDepositDateWrapV97" class="hidden"><label>تاريخ العربون</label><input id="cCompanyDepositDateV97" type="date"></div><div class="full"><label>ملاحظات</label><textarea id="cNotes"></textarea></div><div class="full"><label><input id="bookFirst" type="checkbox" checked style="width:auto"> حجز أول حصة الآن</label></div><div id="firstBookingFields" class="full"><div class="form-grid"><div><label>التاريخ</label><input id="firstDate" type="date"></div><div><label>الساعة</label><select id="firstTime"></select></div><div><label>مدة الحصة</label><select id="firstDurationV109"><option value="60">٦٠ دقيقة (ساعة)</option><option value="90">٩٠ دقيقة (ساعة ونصف)</option><option value="120">١٢٠ دقيقة (ساعتان)</option><option value="50">٥٠ دقيقة</option><option value="30">٣٠ دقيقة</option></select></div></div></div></div><div class="btn-row" style="margin-top:12px"><button type="button" id="saveClientBtn" class="btn btn-green" onclick="saveClient()">حفظ العميل</button><button id="cancelEditBtn" class="btn btn-light hidden" onclick="prepareNewClient()">إلغاء التعديل</button><button class="btn btn-light" onclick="clearClientForm()">تفريغ</button></div></div></section>
+<div id="clientsCounters" class="clients-counters clients-counters-v98"></div><div id="remainingLessonsPanelV98" class="remaining-lessons-panel-v98"></div><h2>العملاء</h2><div class="search"><input id="clientSearch" placeholder="ابحث بالاسم أو رقم التليفون" oninput="renderClients()"><button class="btn btn-primary" onclick="prepareNewClient()">+ عميل</button></div><div class="client-filter"><select id="clientStatusFilter" onchange="renderClients()"><option value="active">العملاء النشطون</option><option value="cancelled">العملاء الملغيون</option><option value="all">كل العملاء</option></select></div><div id="clientsList"></div></section><section id="add" class="page"><h2 id="clientFormTitle">إضافة عميل جديد</h2><div class="card"><div class="form-grid"><div class="full"><label>اسم العميل</label><input id="cName"></div><div><label>رقم التليفون 1</label><input id="cPhone1" type="text" inputmode="tel" autocomplete="tel" dir="ltr" class="phone-input"></div><div><label>رقم التليفون 2</label><input id="cPhone2" type="text" inputmode="tel" autocomplete="tel" dir="ltr" class="phone-input"></div><div><label>رقم واتساب</label><input id="cWhatsapp" type="text" inputmode="tel" autocomplete="tel" dir="ltr" class="phone-input"></div><div><label>حساب رصيد الكورس</label><select id="courseUnitV109" onchange="updateCourseUnitV109()"><option value="lessons">بالحصص — النظام السابق</option><option value="hours">بالساعات الفعلية</option></select><div class="small">لـ ٦ ساعات على ٤ مرات: اختار بالساعات واكتب ٦، ثم احجز كل مرة ٩٠ دقيقة.</div></div><div><label id="courseAmountLabelV109">عدد حصص الكورس</label><input id="cHours" type="number" value="5" min="0" step="1" dir="ltr" onchange="handleCourseCountChangeV110()"><div id="courseZeroHintV110" class="small hidden">عدد الحصص صفر: سيتم تسجيل العميل بدون كورس. احجز له لاحقًا من شاشة الحجز واختر «حصة إضافية».</div></div><div><label>قيمة الكورس</label><input id="cCourseValue" type="number" min="0" dir="ltr"></div><div><label>مصدر العميل</label><select id="cSource" onchange="toggleCompany()"><option value="academy">Master Driving Academy</option><option value="company">شركة</option></select></div><div id="companyWrap" class="hidden"><label>اسم الشركة</label><select id="cCompany"></select></div><div id="commissionWrap" class="hidden"><label>عمولة هذا العميل</label><input id="cCommission" type="number" min="0" dir="ltr"></div><div id="companyDepositWrapV97" class="hidden"><label>العربون الذي حصلته الشركة</label><input id="cCompanyDepositV97" type="number" min="0" dir="ltr" placeholder="0"></div><div id="companyDepositDateWrapV97" class="hidden"><label>تاريخ العربون</label><input id="cCompanyDepositDateV97" type="date"></div><div class="full"><label>ملاحظات</label><textarea id="cNotes"></textarea></div><div class="full"><label><input id="bookFirst" type="checkbox" checked style="width:auto" onchange="toggleFirstBookingFieldsV110()"> حجز أول حصة الآن</label></div><div id="firstBookingFields" class="full"><div class="form-grid"><div><label>التاريخ</label><input id="firstDate" type="date"></div><div><label>الساعة</label><select id="firstTime"></select></div><div><label>مدة الحصة</label><select id="firstDurationV109"><option value="60">٦٠ دقيقة (ساعة)</option><option value="90">٩٠ دقيقة (ساعة ونصف)</option><option value="120">١٢٠ دقيقة (ساعتان)</option><option value="50">٥٠ دقيقة</option><option value="30">٣٠ دقيقة</option></select></div></div></div></div><div class="btn-row" style="margin-top:12px"><button type="button" id="saveClientBtn" class="btn btn-green" onclick="saveClient()">حفظ العميل</button><button id="cancelEditBtn" class="btn btn-light hidden" onclick="prepareNewClient()">إلغاء التعديل</button><button class="btn btn-light" onclick="clearClientForm()">تفريغ</button></div></div></section>
 
 
 
@@ -1477,7 +1477,7 @@ main{
     <div class="form-grid">
       <div class="full">
         <label>العميل</label>
-        <select id="sClient"></select>
+        <select id="sClient" onchange="setBookingTypeForClientV110()"></select>
       </div>
       <div>
         <label>التاريخ</label>
@@ -2069,8 +2069,10 @@ function getEditableCurrentCourse(c){
 }
 
 function saveClient(){
- if(!Number.isFinite(Number(cHours.value)) || Number(cHours.value)<=0) return toast('اكتب رصيد كورس صحيح');
- if(!editingClientId && bookFirst.checked && firstDate.value && firstTime.value){
+ if(cHours.value.trim()==='' || !Number.isFinite(Number(cHours.value)) || Number(cHours.value)<0) return toast('اكتب عدد حصص صحيح (يمكن كتابة صفر)');
+ const requestedCourseAmountV110=Number(cHours.value);
+ if(requestedCourseAmountV110===0) handleCourseCountChangeV110();
+ if(!editingClientId && requestedCourseAmountV110>0 && bookFirst.checked && firstDate.value && firstTime.value){
   if(!validatePeriodV109(firstDate.value,firstTime.value,Number(firstDurationV109.value))) return;
   if(courseUnitV109.value==='hours' && Number(firstDurationV109.value)>Number(cHours.value)*60) return toast('مدة الحصة أكبر من رصيد الكورس');
  }
@@ -2088,7 +2090,7 @@ function saveClient(){
    const client=db.clients.find(c=>c.id===editingClientId);
    if(!client) return toast('تعذر العثور على العميل');
 
-   const newHours=Number(cHours.value||5);
+   const newHours=requestedCourseAmountV110;
    const newCourseValue=Number(cCourseValue.value||0);
 
    if(Number.isNaN(newCourseValue) || newCourseValue<0){
@@ -2114,7 +2116,7 @@ function saveClient(){
      course.value=newCourseValue;
      course.companyDeposit=cSource.value==='company'?Number(document.getElementById('cCompanyDepositV97')?.value||0):0;
      course.companyDepositDate=cSource.value==='company'?(document.getElementById('cCompanyDepositDateV97')?.value||todayISO()):'';
-   }else{
+   }else if(newHours>0){
      client.courses=[{
        id:uid(),
        name:'الكورس 1',
@@ -2127,6 +2129,9 @@ function saveClient(){
        status:'active'
      }];
      editingCourseIdV59=client.courses[0].id;
+   }else{
+     client.courses=[];
+     editingCourseIdV59=null;
    }
 
    client.name=name;
@@ -2192,7 +2197,7 @@ function saveClient(){
    phone2:normalizePhoneValue(cPhone2.value),
    whatsapp:normalizePhoneValue(cWhatsapp.value)||phone1,
    active:true,
-   hours:Number(cHours.value||5),
+   hours:requestedCourseAmountV110,
    courseValue:Number(cCourseValue.value||0),
    usedHours:0,
    source:cSource.value,
@@ -2203,23 +2208,24 @@ function saveClient(){
    created:todayISO()
  };
 
- // Create course record immediately so legacy and new systems agree from day one.
- client.courses=[{
+ // Create a course record only when the client actually has a course.
+ // A zero count means per-lesson customer; extra bookings remain available.
+ client.courses=requestedCourseAmountV110>0?[{
    id:uid(),
    name:'الكورس 1',
    unit:courseUnitV109.value,
-   lessons:Number(cHours.value||5),
+   lessons:requestedCourseAmountV110,
    value:Number(cCourseValue.value||0),
    startDate:todayISO(),
    companyDeposit:cSource.value==='company'?Number(document.getElementById('cCompanyDepositV97')?.value||0):0,
    companyDepositDate:cSource.value==='company'?(document.getElementById('cCompanyDepositDateV97')?.value||todayISO()):'',
    status:'active'
- }];
+ }]:[];
 
  db.clients.push(client);
  syncCompanyDepositCommissionOffsetsV97();
 
- if(bookFirst.checked && firstDate.value && firstTime.value){
+ if(requestedCourseAmountV110>0 && bookFirst.checked && firstDate.value && firstTime.value){
    db.bookings.push({
      id:uid(),
      clientId:client.id,
@@ -2246,7 +2252,7 @@ function clearClientForm(){
  editingCourseIdV59=null;
  ['cName','cPhone1','cPhone2','cWhatsapp','cCourseValue','cCommission','cCompanyDepositV97','cNotes'].forEach(id=>document.getElementById(id).value='');
  courseUnitV109.value='lessons';updateCourseUnitV109();firstDurationV109.value='60';
- cHours.value=5;cSource.value='academy';if(document.getElementById('cCompanyDepositDateV97')) cCompanyDepositDateV97.value=todayISO();toggleCompany();bookFirst.checked=true;firstBookingFields.classList.remove('hidden');firstDate.value=todayISO();
+ cHours.value=5;handleCourseCountChangeV110();cSource.value='academy';if(document.getElementById('cCompanyDepositDateV97')) cCompanyDepositDateV97.value=todayISO();toggleCompany();bookFirst.checked=true;firstBookingFields.classList.remove('hidden');firstDate.value=todayISO();
 }
 function prepareNewClient(){
  editingCourseIdV59=null;
@@ -2275,7 +2281,7 @@ function editClient(id){
  const currentCourse=getEditableCurrentCourse(c);
  editingCourseIdV59=currentCourse?currentCourse.id:null;
  courseUnitV109.value=currentCourse?.unit||'lessons';updateCourseUnitV109();
- cHours.value=currentCourse?Number(currentCourse.lessons||5):(c.hours||5);
+ cHours.value=currentCourse?Number(currentCourse.lessons??0):Number(c.hours??5);
  cCourseValue.value=currentCourse?Number(currentCourse.value||0):Number(c.courseValue||0);
  cSource.value=c.source||'academy';
  toggleCompany();
@@ -2287,6 +2293,7 @@ function editClient(id){
  cNotes.value=c.notes||'';
  bookFirst.checked=false;
  firstBookingFields.classList.add('hidden');
+ handleCourseCountChangeV110();
  goto('add');
 }
 
@@ -3472,6 +3479,7 @@ function quickBook(id){
  renderSchedule();
  const clientEl=document.getElementById('sClient');
  if(clientEl) clientEl.value=id;
+ setBookingTypeForClientV110();
 }
 function statusBooking(id,status){
  const b=db.bookings.find(x=>x.id===id); if(!b)return;
@@ -6363,6 +6371,31 @@ function validateCourseBudgetV109(clientId,courseId,type,duration,exclude=''){
 }
 function validateNewBookingV109(){return validatePeriodV109(sDate.value,sTime.value,Number(sDurationV109.value))&&validateCourseBudgetV109(sClient.value,null,sType.value,Number(sDurationV109.value));}
 function updateCourseUnitV109(){courseAmountLabelV109.textContent=courseUnitV109.value==='hours'?'إجمالي ساعات الكورس':'عدد حصص الكورس';cHours.step=courseUnitV109.value==='hours'?'0.5':'1';}
+function handleCourseCountChangeV110(){
+ const isZero=cHours.value.trim()!=='' && Number(cHours.value)===0;
+ const hint=document.getElementById('courseZeroHintV110');
+ if(hint) hint.classList.toggle('hidden',!isZero);
+ if(isZero){
+   if(bookFirst.checked) bookFirst.checked=false;
+   firstBookingFields.classList.add('hidden');
+ }else if(bookFirst.checked){
+   firstBookingFields.classList.remove('hidden');
+ }
+}
+function toggleFirstBookingFieldsV110(){
+ if(Number(cHours.value)===0 && bookFirst.checked){
+   bookFirst.checked=false;
+   toast('عدد حصص الكورس صفر؛ احفظ العميل ثم احجز له حصة إضافية من شاشة الحجز');
+ }
+ firstBookingFields.classList.toggle('hidden',!bookFirst.checked);
+}
+function setBookingTypeForClientV110(){
+ const client=db.clients.find(c=>c.id===sClient.value);
+ if(!client || !sType) return;
+ const course=getActiveCourseV32(client);
+ const stats=course?getCourseStatsV32(client,course):{remaining:0};
+ sType.value=course && stats.remaining>0?'course':'extra';
+}
 // Keep the original storage key and never reinterpret existing courses automatically.
 fillTimes=function(sel,includeEarly=true,halfHours=false){sel.innerHTML='';for(let n=(includeEarly?8:14)*60;n<=22*60;n+=halfHours?30:60){const t=String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0');sel.add(new Option(formatTime12(t),t));}};
 isSlotAvailableForNewBooking=function(date,time){return !db.bookings.some(b=>b.date===date&&b.status==='booked'&&overlapsV109(time,Number(document.getElementById('sDurationV109')?.value||60),b.time,bookingMinutesV109(b)));};
