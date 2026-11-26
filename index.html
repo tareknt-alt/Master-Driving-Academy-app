@@ -3097,7 +3097,7 @@ function openClientDetails(id){
         ${c.whatsapp?`<div><span>واتساب</span><b dir="ltr">${esc(c.whatsapp)}</b></div>`:''}
       </div>
       <div class="btn-row" style="margin-top:12px">
-        <button type="button" class="btn btn-green" onclick="sendAcademyFacebookV108('${c.id}')">إرسال صفحة الأكاديمية عبر واتساب</button>
+        <button type="button" class="btn btn-green" onclick="sendAcademyFacebookV108('${c.id}')">إرسال روابط الأكاديمية عبر واتساب</button>
       </div>
     </div>
 
@@ -3357,7 +3357,7 @@ ${c.phone2?`<span class="phone-num">${esc(c.phone2)}</span><button class="copy-b
 ${extraLessonsBadgesV104(c.id)}
 <div class="btn-row" style="margin-top:8px">
 <button class="btn btn-green" onclick="wa('${c.whatsapp}')">واتساب</button>
-<button type="button" class="btn btn-light" onclick="sendAcademyFacebookV108('${c.id}')">إرسال صفحة الأكاديمية</button>
+<button type="button" class="btn btn-light" onclick="sendAcademyFacebookV108('${c.id}')">إرسال روابط الأكاديمية</button>
 ${isActive?`<button class="btn btn-light" onclick="quickBook('${c.id}')">حجز حصة</button>`:''}
 <button class="btn btn-light" onclick="editClient('${c.id}')">تعديل</button>
 ${isActive?`<button class="btn btn-danger" onclick="cancelClient('${c.id}')">إلغاء العميل</button>`:`<button class="btn btn-green" onclick="reactivateClient('${c.id}')">إعادة التفعيل</button>`}
@@ -6108,8 +6108,11 @@ function sendAcademyFacebookV108(clientId){
   const firstName=(client.name||'').trim().split(/\s+/)[0];
   const message=(firstName?'أهلًا يا '+firstName+' 🌷':'أهلًا بحضرتك 🌷')+
     '\nمرحبًا بيك في Master Driving Academy 🚗'+
-    '\nدي صفحة الأكاديمية على فيسبوك، تقدر تتابع عليها أخبارنا ونصائح القيادة:'+
+    '\nتابعنا على فيسبوك وتيك توك علشان توصلك أخبارنا ونصائح القيادة:'+
+    '\n\n📘 فيسبوك:'+
     '\nhttps://www.facebook.com/share/16QtfHWEjiv/?mibextid=wwXIfr'+
+    '\n\n🎵 تيك توك:'+
+    '\nhttps://www.tiktok.com/@masterdrivinalex'+
     '\nسعداء بانضمامك لينا 💚';
   waMessageV70(number,message);
 }
